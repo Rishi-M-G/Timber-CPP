@@ -1,0 +1,29 @@
+# Ignore Visual Studio temporary files, build results, and
+# build directories.
+.vscode/
+.vs/
+*.log
+*.tlog
+*.lastbuildstate
+
+# Ignore Visual Studio Code workspace files
+.vscode/
+
+# Ignore build output directories
+bin/
+obj/
+
+# Ignore user-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Ignore databases
+*.mdf
+*.ldf
+
+# Ignore others
+*.VC.opendb
+*.VC.db
