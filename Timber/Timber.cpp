@@ -252,7 +252,7 @@ int main()
 
 				// Has the cloud reached the right hand edge of the screen?
 
-				if (spriteCloud1.getPosition().x > 1920);
+				if (spriteCloud1.getPosition().x > 1920)
 				{
 					// Set it up ready to be a whole new cloud next frame
 					cloud1Active = false;
@@ -278,7 +278,7 @@ int main()
 
 				// Has the cloud reached the right hand edge of the screen?
 
-				if (spriteCloud2.getPosition().x > 1920);
+				if (spriteCloud2.getPosition().x > 1920)
 				{
 					// Set it up ready to be a whole new cloud next frame
 					cloud2Active = false;
@@ -303,7 +303,7 @@ int main()
 
 				// Has the cloud reached the right hand edge of the screen?
 
-				if (spriteCloud3.getPosition().x > 1920);
+				if (spriteCloud3.getPosition().x > 1920)
 				{
 					// Set it up ready to be a whole new cloud next frame
 					cloud3Active = false;
