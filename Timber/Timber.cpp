@@ -187,6 +187,49 @@ int main()
 		branches[i].setOrigin(220, 20);
 	}
 
+	// Preparing the player
+	Texture texturePlayer;
+	texturePlayer.loadFromFile("C:\\Users\\Admin\\source\\repos\\Timber\\graphics\\player.png");
+	Sprite spritePlayer;
+	spritePlayer.setTexture(texturePlayer);
+	spritePlayer.setPosition(580, 720);
+
+	// The player starts on the LEFT
+	side playerSide = side::LEFT;
+
+	// Preparing the gravestone
+	Texture textureRIP;
+	textureRIP.loadFromFile("C:\\Users\\Admin\\source\\repos\\Timber\\graphics\\rip.png");
+	Sprite spriteRIP;
+	spriteRIP.setTexture(textureRIP);
+	spriteRIP.setPosition(600, 860);
+
+	// Preparing the Axe
+	Texture textureAxe;
+	textureAxe.loadFromFile("C:\\Users\\Admin\\source\\repos\\Timber\\graphics\\axe.png");
+	Sprite spriteAxe;
+	spriteAxe.setTexture(textureAxe);
+	spriteAxe.setPosition(700, 830);
+
+	// Line the axe up with the tree
+	const float AXE_POSITION_LEFT = 700;
+	const float AXE_POSITION_RIGHT = 1075;
+
+	// Prepare the flying log
+	Texture textureLog;
+	textureLog.loadFromFile("C:\\Users\\Admin\\source\\repos\\Timber\\graphics\\log.png");
+	Sprite spriteLog;
+	spriteLog.setTexture(textureLog);
+	spriteLog.setPosition(810, 720);
+
+	// Log Related variables
+	bool logActive = false;
+	float logSpeedX = 1000;
+	float logSpeedY = -1500;
+
+	// Control the player input
+	bool acceptInput = false;
+
 	//Main Game Loop
 	while (window.isOpen()) {
 		/*
@@ -204,6 +247,70 @@ int main()
 			// Reset the time and the score
 			score = 0;
 			timeRemaining = 6;
+
+			// Make all the branches disappear
+			// Starting in the second position
+			for (int i = 1; i < NUM_BRANCHES; i++)
+			{
+				branchPositions[i] = side::NONE;
+			}
+
+			// Making sure that gravestone is hidden
+			spriteRIP.setPosition(675, 2000);
+
+			//Moving the player into position
+			spritePlayer.setPosition(580, 720);
+			acceptInput = true;
+		}
+
+		// Wrap the player controls to
+		// Making sure accepting player input
+		if (acceptInput)
+		{
+			// Handling the right cursor key
+			if (Keyboard::isKeyPressed(Keyboard::Right))
+			{
+				// Make sure the player is on the right
+				playerSide = side::RIGHT;
+				
+				score ++;
+				
+				// Add to the amount of time remaining
+				timeRemaining += (2 / score) + .15;
+				spriteAxe.setPosition(AXE_POSITION_RIGHT, spriteAxe.getPosition().y);
+				spritePlayer.setPosition(1200, 720);
+
+				// Update the branches
+				updateBranches(score);
+
+				// Set the log flying to the left
+				spriteLog.setPosition(810, 720);
+				logSpeedX = -5000;
+				logActive = true;
+				acceptInput = false;
+			}
+
+			// Handling the left cursor key
+			if (Keyboard::isKeyPressed(Keyboard::Left))
+			{
+				// Make sure the player is on the left
+				playerSide = side::LEFT;
+				score++;
+
+				// Add to the amount of time remaining
+				timeRemaining += (2 / score) + .15;
+				spriteAxe.setPosition(AXE_POSITION_LEFT, spriteAxe.getPosition().y);
+				spritePlayer.setPosition(580, 720);
+
+				// Update the branches
+				updateBranches(score);
+
+				// Set the log flying
+				spriteLog.setPosition(810, 720);
+				logSpeedX = 5000;
+				logActive = true;
+				acceptInput = false;
+			}
 		}
 
 		/*
@@ -395,6 +502,18 @@ int main()
 
 		// Draw the Tree
 		window.draw(spriteTree);
+
+		// Draw the Player
+		window.draw(spritePlayer);
+
+		// Draw the Axe
+		window.draw(spriteAxe);
+
+		// Draw the flying log
+		window.draw(spriteLog);
+
+		// Draw the gravestone
+		window.draw(spriteRIP);
 
 		// Draw the insect
 		window.draw(spriteBee);
