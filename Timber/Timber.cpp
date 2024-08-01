@@ -1,6 +1,7 @@
 // include important libraries here
 #include <sstream>
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 // Make code easier to type by using "using namespace"
 using namespace sf;
@@ -15,7 +16,7 @@ Sprite branches[NUM_BRANCHES];
 // Where is the player / Branch ?
 // Left or Right
 
-enum class side { LEFT,RIGHT,NONE };
+enum class side { LEFT, RIGHT, NONE };
 side branchPositions[NUM_BRANCHES]; // we will have an array called branchPositions with six values in it. Each of these values is of the side type and can be either LEFT, RIGHT, or NONE.
 
 
@@ -23,10 +24,12 @@ side branchPositions[NUM_BRANCHES]; // we will have an array called branchPositi
 int main()
 {
 	//Create a video mode object
-	VideoMode vm(1920, 1080);
+	VideoMode vm(960, 540);
 
 	// Create and open a window for the game
-	RenderWindow window(vm, "Timber !!!", Style::Fullscreen);
+	RenderWindow window(vm, "Timber !!!");
+	View view(sf::FloatRect(0, 0, 1920, 1080));
+	window.setView(view);
 
 	/*
 	* Background
@@ -87,7 +90,7 @@ int main()
 
 	// Is the Bee currently moving?
 	bool beeActive = false; //True if bee is moving
-	 
+
 	// How fast can the bee fly
 	float beeSpeed = 0.0f; //speed in pixels per second
 
@@ -180,7 +183,7 @@ int main()
 	for (int i = 0; i < NUM_BRANCHES; i++)
 	{
 		branches[i].setTexture(textureBranch);
-		branches[i].setPosition(-2000, -2000);
+		branches[i].setPosition(-2000,2000);
 
 		// Set the sprite's origin to dead centre
 		// We can then spin it round without changing its position
@@ -222,7 +225,7 @@ int main()
 	spriteLog.setTexture(textureLog);
 	spriteLog.setPosition(810, 720);
 
-	// Log Related variables
+	// Log Related Variables
 	bool logActive = false;
 	float logSpeedX = 1000;
 	float logSpeedY = -1500;
@@ -230,11 +233,48 @@ int main()
 	// Control the player input
 	bool acceptInput = false;
 
+	// Prepare the sounds
+
+	// The player chopping sound
+	SoundBuffer chopBuffer;
+	chopBuffer.loadFromFile("C:\\Users\\Admin\\source\\repos\\Timber\\Sound\\chop.wav");
+	Sound chop;
+	chop.setBuffer(chopBuffer);
+
+	// The death sound
+	SoundBuffer deathBuffer;
+	deathBuffer.loadFromFile("C:\\Users\\Admin\\source\\repos\\Timber\\Sound\\death.wav");
+	Sound death;
+	death.setBuffer(deathBuffer);
+
+	// Out of Time Sound
+	SoundBuffer ootBuffer;
+	ootBuffer.loadFromFile("C:\\Users\\Admin\\source\\repos\\Timber\\Sound\\out_of_time.wav");
+	Sound outOfTime;
+	outOfTime.setBuffer(ootBuffer);
+
+
+
 	//Main Game Loop
 	while (window.isOpen()) {
 		/*
 		* *****Handle the players input*****
 		*/
+
+		Event event;
+
+		while (window.pollEvent(event))
+		{
+			if (event.type == Event::KeyReleased && !paused)
+			{
+				//Listen for key presses again
+				acceptInput = true;
+
+				// hide the axe
+				spriteAxe.setPosition(2000, spriteAxe.getPosition().y);
+			}
+		}
+
 		if (Keyboard::isKeyPressed(Keyboard::Escape))
 		{
 			window.close();
@@ -272,9 +312,9 @@ int main()
 			{
 				// Make sure the player is on the right
 				playerSide = side::RIGHT;
-				
-				score ++;
-				
+
+				score++;
+
 				// Add to the amount of time remaining
 				timeRemaining += (2 / score) + .15;
 				spriteAxe.setPosition(AXE_POSITION_RIGHT, spriteAxe.getPosition().y);
@@ -288,6 +328,9 @@ int main()
 				logSpeedX = -5000;
 				logActive = true;
 				acceptInput = false;
+
+				// Play a chop sound
+				chop.play();
 			}
 
 			// Handling the left cursor key
@@ -310,6 +353,9 @@ int main()
 				logSpeedX = 5000;
 				logActive = true;
 				acceptInput = false;
+
+				// Play a chop sound
+				chop.play();
 			}
 		}
 
@@ -340,6 +386,9 @@ int main()
 				FloatRect textRect = messageText.getLocalBounds();
 				messageText.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
 				messageText.setPosition(1920 / 2.0f, 1080 / 2.0f);
+
+				// Play the out of time sound
+				outOfTime.play();
 			}
 
 			// Set up the bee
@@ -477,8 +526,48 @@ int main()
 				}
 			}
 
+			// Handle the flying log
+			if (logActive)
+			{
+				spriteLog.setPosition(spriteLog.getPosition().x + (logSpeedX * dt.asSeconds()), spriteLog.getPosition().y + (logSpeedY * dt.asSeconds()));
+
+				// Has the log reached the right or left edge?
+				if (spriteLog.getPosition().x < -100 || spriteLog.getPosition().x > 2000)
+				{
+					// Set it up ready to be a whole new log next frame
+					logActive = false;
+					spriteLog.setPosition(810, 720);
+				}
+			}
+
+			// Handling Death of the Player
+			if (branchPositions[5] == playerSide)
+			{
+				//death
+				paused = true;
+				acceptInput = false;
+
+				// Draw the gravestone
+				spriteRIP.setPosition(525, 760);
+
+				// Hide the player
+				spritePlayer.setPosition(2000, 660);
+
+				// Change the text of the message
+				messageText.setString("SQUISHED ! !");
+				// Center the messageText on the screen
+				FloatRect textRect = messageText.getLocalBounds();
+				messageText.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
+				messageText.setPosition(1920 / 2.0f, 1080 / 2.0f);
+
+				// Play Death Sound
+				death.play();
+			}
+
+
+
 		} // End If (!paused)
-		
+
 		/*
 		* *****Draw the scene*****
 		*/
@@ -523,7 +612,7 @@ int main()
 
 		// Draw Time Bar
 		window.draw(timeBar);
-		
+
 		// Draw the message if paused
 		if (paused)
 		{
