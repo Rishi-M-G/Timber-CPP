@@ -2,6 +2,10 @@
 #include <sstream>
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include <json.hpp>
+#include <iostream>
+#include <fstream>
+
 
 // Make code easier to type by using "using namespace"
 using namespace sf;
@@ -19,6 +23,19 @@ Sprite branches[NUM_BRANCHES];
 enum class side { LEFT, RIGHT, NONE };
 side branchPositions[NUM_BRANCHES]; // we will have an array called branchPositions with six values in it. Each of these values is of the side type and can be either LEFT, RIGHT, or NONE.
 
+/*
+* Reading and Writing Asset Functionality using JSON *************************
+*/
+// Function to load configuration from JSON file
+nlohmann::json loadConfig(const std::string& filename) {
+	std::ifstream i(filename);
+	nlohmann::json j;
+	i >> j;
+	i.close();
+	return j;
+}
+
+// ****************************************************************************
 
 // This is where our game starts from
 int main()
@@ -38,8 +55,24 @@ int main()
 	//Create a texture to hold a graphic on the GPU
 	Texture textureBackground;
 
+	// Load JSON Configuration
+	nlohmann::json config;
+	try {
+		config = loadConfig("assetConfig.json");
+	}
+	catch (const std::exception& e) {
+		std::cerr << "Failed to load config: " << e.what() << std::endl;
+		return -1;
+	}
+
+	// Load the background texture using the path from the JSON config
+	if (!textureBackground.loadFromFile(config["graphics"]["background"].get<std::string>())) {
+		std::cerr << "Failed to load background texture" << std::endl;
+		return -1;
+	}
+
 	//Load a graphic into the texture
-	textureBackground.loadFromFile("C:\\Users\\Admin\\source\\repos\\Timber\\graphics\\background.png");
+	//textureBackground.loadFromFile("C:\\Users\\Admin\\source\\repos\\Timber\\graphics\\background.png");
 
 	//Create a sprite
 	Sprite spriteBackground;
