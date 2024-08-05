@@ -27,8 +27,6 @@ Through the development of Timber, I have gained practical experience in game pr
 - **Scoring System**: Points are awarded based on speed and accuracy of the tree chopping.
 - **Adaptive Difficulty**: The game's difficulty increases as the player's score increases, with time bar running out faster.
 
-### Assets
-
 ### Roadmap for Future Updates
 - **Frame Rate Display**: Adding an on-screen frame rate.
 - **"Start Your Game Prompt"**: Implementing a start screen that instructs players to press the left or right arrow key to begin playing.
