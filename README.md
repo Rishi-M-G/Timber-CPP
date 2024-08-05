@@ -45,5 +45,3 @@ Through the development of Timber, I have gained practical experience in game pr
 - **Leaderboard** - Not Started
 
 
-## License
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) file for details
