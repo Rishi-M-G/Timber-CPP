@@ -4,9 +4,12 @@
 Timber is a fast-paced arcade-style game where the player must chop down trees while avoiding randomly moving branches. The game is designed to be continuously challenging, as the time is always running out, and players need to make strategic moves before getting hit by the branches.
 
 ## Visuals
-![Gameplay gif](url_to_gif)
-![Screenshot 1](url_to_screenshot1)
-![Screenshot 2](url_to_screenshot2)
+![Gameplay gif](game_gif.gif)
+
+![Landing Screen](start.png)
+![Player Squished](squished.png)
+![Out Of Time](oft.png)
+
 
 ### Technologies Used
 This game is developed using C++ and utilizes the SFML library, demonstrating real-time interaction handling and graphics rendering.
