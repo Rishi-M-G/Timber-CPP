@@ -65,7 +65,8 @@ int main()
 		return -1;
 	}
 
-	// Load the background texture using the path from the JSON config
+	
+	// Load the background texture using the path from the JSON config file
 	if (!textureBackground.loadFromFile(config["graphics"]["background"].get<std::string>())) {
 		std::cerr << "Failed to load background texture" << std::endl;
 		return -1;
@@ -90,8 +91,14 @@ int main()
 	//Make a tree sprite
 	Texture textureTree;
 
+	// Load the Tree texture using the path from the JSON config file
+	if (!textureTree.loadFromFile(config["graphics"]["tree"].get<std::string>())) {
+		std::cerr << "Failed to load tree texture" << std::endl;
+		return -1;
+	}
+
 	//Load the tree graphic into the texture
-	textureTree.loadFromFile("C:\\Users\\Admin\\source\\repos\\Timber\\graphics\\tree.png");
+	//textureTree.loadFromFile("C:\\Users\\Admin\\source\\repos\\Timber\\graphics\\tree.png");
 
 	//Create a sprite for the tree
 	Sprite spriteTree;
@@ -108,6 +115,12 @@ int main()
 
 	// Prepare the Bee
 	Texture textureBee;
+
+	// Load the bee texture using the path from the JSON config file
+	/*if (!textureBee.loadFromFile(config["graphics"]["bee"].get<std::string>())) {
+		std::cerr << "Failed to load bee texture" << std::endl;
+		return -1;
+	}*/
 
 	//Load Bee graphic into the texture
 	textureBee.loadFromFile("C:\\Users\\Admin\\source\\repos\\Timber\\graphics\\bee.png");
@@ -133,6 +146,12 @@ int main()
 
 	// Making 3 clouds from one texture
 	Texture textureCloud;
+
+	// Load the cloud texture using the path from the JSON config file
+	/*if (!textureCloud.loadFromFile(config["graphics"]["cloud"].get<std::string>())) {
+		std::cerr << "Failed to load cloud texture" << std::endl;
+		return -1;
+	}*/
 
 	// Load graphic to the texture
 	textureCloud.loadFromFile("C:\\Users\\Admin\\source\\repos\\Timber\\graphics\\cloud.png");
@@ -210,6 +229,13 @@ int main()
 
 	// Preparing 6 Branches
 	Texture textureBranch;
+
+	// Load the branch texture using the path from the JSON config file
+	/*if (!textureBranch.loadFromFile(config["graphics"]["branch"].get<std::string>())) {
+		std::cerr << "Failed to load branch texture" << std::endl;
+		return -1;
+	}*/
+
 	textureBranch.loadFromFile("C:\\Users\\Admin\\source\\repos\\Timber\\graphics\\branch.png");
 
 	// Setting the texture for each branch sprite
@@ -225,7 +251,15 @@ int main()
 
 	// Preparing the player
 	Texture texturePlayer;
+
+	// Load the Player texture using the path from the JSON config file
+	/*if (!texturePlayer.loadFromFile(config["graphics"]["player"].get<std::string>())) {
+		std::cerr << "Failed to load player texture" << std::endl;
+		return -1;
+	}*/
+
 	texturePlayer.loadFromFile("C:\\Users\\Admin\\source\\repos\\Timber\\graphics\\player.png");
+
 	Sprite spritePlayer;
 	spritePlayer.setTexture(texturePlayer);
 	spritePlayer.setPosition(580, 720);
@@ -235,6 +269,13 @@ int main()
 
 	// Preparing the gravestone
 	Texture textureRIP;
+
+	// Load the RIP texture using the path from the JSON config file
+	/*if (!textureRIP.loadFromFile(config["graphics"]["rip"].get<std::string>())) {
+		std::cerr << "Failed to load rip texture" << std::endl;
+		return -1;
+	}*/
+
 	textureRIP.loadFromFile("C:\\Users\\Admin\\source\\repos\\Timber\\graphics\\rip.png");
 	Sprite spriteRIP;
 	spriteRIP.setTexture(textureRIP);
@@ -242,6 +283,13 @@ int main()
 
 	// Preparing the Axe
 	Texture textureAxe;
+
+	// Load the axe texture using the path from the JSON config file
+	/*if (!textureAxe.loadFromFile(config["graphics"]["axe"].get<std::string>())) {
+		std::cerr << "Failed to load axe texture" << std::endl;
+		return -1;
+	}*/
+
 	textureAxe.loadFromFile("C:\\Users\\Admin\\source\\repos\\Timber\\graphics\\axe.png");
 	Sprite spriteAxe;
 	spriteAxe.setTexture(textureAxe);
@@ -253,6 +301,12 @@ int main()
 
 	// Prepare the flying log
 	Texture textureLog;
+
+	// Load the log texture using the path from the JSON config file
+	/*if (!textureLog.loadFromFile(config["graphics"]["log"].get<std::string>())) {
+		std::cerr << "Failed to load log texture" << std::endl;
+		return -1;
+	}*/
 	textureLog.loadFromFile("C:\\Users\\Admin\\source\\repos\\Timber\\graphics\\log.png");
 	Sprite spriteLog;
 	spriteLog.setTexture(textureLog);
