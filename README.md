@@ -34,7 +34,7 @@ Through the development of Timber, I have gained practical experience in game pr
 - **"Start Your Game Prompt"**: Implementing a start screen that instructs players to press the left or right arrow key to begin playing.
 - **Asset Management App**: Developing a separate application using Qt and JSON configuration files to allow users to customize game sprites. This app will be linked here once completed.
 - **Additional Levels**: Planning to introduce more complex levels with varying environmental challenges.
-- ** Leaderboard**: Implementing a leaderboard to record high scores.
+- **Leaderboard**: Implementing a leaderboard to record high scores.
 
 ### Project Status
 - **Current Version**: 1.0.0
