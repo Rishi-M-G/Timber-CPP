@@ -1,13 +1,13 @@
 {
 	"graphics":{
-		"background": "C:\\Users\\Admin\\source\\repos\\Timber\\graphics\\background.png",
-		"tree": "C:\\Users\\Admin\\source\\repos\\Timber\\graphics\\tree.png",
-		"bee": "C:\\Users\\Admin\\source\\repos\\Timber\\graphics\\bee.png",
-		"cloud": "C:\\Users\\Admin\\source\\repos\\Timber\\graphics\\cloud.png",
-		"branch": "C:\\Users\\Admin\\source\\repos\\Timber\\graphics\\branch.png",
-		"player": "C:\\Users\\Admin\\source\\repos\\Timber\\graphics\\player.png",
-		"rip": "C:\\Users\\Admin\\source\\repos\\Timber\\graphics\\rip.png",
-		"axe": "C:\\Users\\Admin\\source\\repos\\Timber\\graphics\\axe.png",
-		"log": "C:\\Users\\Admin\\source\\repos\\Timber\\graphics\\log.png"
+		"background": "C:\\Users\\Admin\\source\\repos\\Timber\\graphics\\background\\background.png",
+		"tree": "C:\\Users\\Admin\\source\\repos\\Timber\\graphics\\tree\\tree.png",
+		"bee": "C:\\Users\\Admin\\source\\repos\\Timber\\graphics\\bee\\bee.png",
+		"cloud": "C:\\Users\\Admin\\source\\repos\\Timber\\graphics\\cloud\\cloud.png",
+		"branch": "C:\\Users\\Admin\\source\\repos\\Timber\\graphics\\branch\\branch.png",
+		"player": "C:\\Users\\Admin\\source\\repos\\Timber\\graphics\\player\\player.png",
+		"rip": "C:\\Users\\Admin\\source\\repos\\Timber\\graphics\\rip\\rip.png",
+		"axe": "C:\\Users\\Admin\\source\\repos\\Timber\\graphics\\axe\\axe.png",
+		"log": "C:\\Users\\Admin\\source\\repos\\Timber\\graphics\\log\\log.png"
 	}
 }
